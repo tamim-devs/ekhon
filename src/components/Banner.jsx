@@ -45,19 +45,19 @@ const Banner = () => {
           <Image
             src="/Website-09.png"
             alt="Home service"
-            width={200}
-            height={200}
+            width={150}
+            height={150}
             className="
               absolute
               left-1/2
-              top-[30%]
+              top-[34%]
               z-10
               w-[70px]
               -translate-x-1/2
 
               sm:w-[160px]
 
-              lg:w-[200px]
+              lg:w-[150px]
             "
           />
 
@@ -66,14 +66,14 @@ const Banner = () => {
             src="/Website-11.png"
             alt="Application"
             width={900}
-            height={500}
+            height={900}
             className="
               absolute
               left-1/2
               top-[47.5%]
               z-10
               h-auto
-              w-[52%]
+               w-[65%] 
               -translate-x-1/2
             "
           />
