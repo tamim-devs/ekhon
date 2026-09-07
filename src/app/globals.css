@@ -10,5 +10,5 @@
 
 
 body {
-  font-family: "AmpleSoft", sans-serif;
+font-family: var(--font-ample-soft), sans-serif;
 }

@@ -112,7 +112,7 @@ const Navbar = () => {
                 key={item.name}
                 href={item.href}
                 onClick={() => handleNavClick(item.name)}
-                className={`mb-1 flex items-center rounded-2xl px-5 py-3 text-sm font-medium transition ${
+                className={`mb-1 flex font-focus items-center rounded-2xl px-5 py-3 text-sm font-medium transition ${
                   isActive
                     ? "bg-[#d7f2fa] text-[#123f68]"
                     : "text-gray-600 hover:bg-white hover:text-[#123f68]"
