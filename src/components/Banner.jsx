@@ -112,7 +112,7 @@ const Banner = () => {
                 md:text-base
                 lg:text-base
               "
-              style={{ fontFamily: "Amplesoft, sans-serif" }}
+              style={{ fontFamily: "Inter, sans-serif" }}
             >
               Find trusted professionals for your home,
               <br />
