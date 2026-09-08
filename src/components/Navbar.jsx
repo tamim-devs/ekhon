@@ -44,7 +44,7 @@ const [activeItem, setActiveItem] = useState(null);
         </a>
 
         {/* Desktop Navigation */}
-        <div className="hidden items-center gap-1 rounded-full border border-gray-100 bg-[#f5f6f9] p-1.5 shadow-sm md:flex">
+        <div className="hidden items-center gap-1 rounded-full border border-gray-100 bg-[#f5f6f9]  shadow-sm md:flex">
           {navItems.map((item) => {
             const isActive = activeItem === item.name;
 
@@ -53,21 +53,21 @@ const [activeItem, setActiveItem] = useState(null);
   key={item.name}
   href={item.href}
   onClick={() => handleNavClick(item.name)}
-  className={`rounded-full px-5 py-2.5 text-md font-medium transition-all duration-300 ${
+  className={`rounded-full px-4 py-1.5 text-md font-medium transition-all duration-300 ${
     isActive
       ? "bg-[#d7f2fa] text-[#123f68] shadow-sm"
       : "text-gray-600 hover:bg-white hover:text-[#123f68]"
   }`}
 >
   <span
-    className={`mr-1.5 font-extrabold text-md transition ${
+    className={`mr-1.5 font-extrabold text-[20px] text-md transition ${
       isActive ? "opacity-100" : "opacity-50"
     }`}
   >
     •
   </span>
 
-  <span style={{ fontFamily: "Amplesoft, sans-serif" }}>
+  <span style={{ fontFamily: "Inter, sans-serif" }}>
     {item.name}
   </span>
 </a>
@@ -76,8 +76,8 @@ const [activeItem, setActiveItem] = useState(null);
         </div>
 
         {/* Download Button */}
-        <button className="hidden rounded-full bg-[#073e6c] px-6 py-3 text-md font-semibold tracking-wide text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#062f52] hover:shadow-md md:block">
-  <span style={{ fontFamily: "Amplesoft, sans-serif" }}>
+        <button className="hidden rounded-full bg-[#073e6c] px-4 py-1.5 text-md font-medium tracking-wide text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#062f52] hover:shadow-md md:block">
+  <span style={{ fontFamily: "Inter, sans-serif" }}>
     DOWNLOAD
   </span>
 </button>
@@ -125,14 +125,14 @@ const [activeItem, setActiveItem] = useState(null);
 >
   <span className="mr-2 font-extrabold">•</span>
 
-  <span style={{ fontFamily: "Amplesoft, sans-serif" }}>
+  <span style={{ fontFamily: "Inter, sans-serif" }}>
     {item.name}
   </span>
 </a>
             );
           })}
         <button className="mt-2 w-full rounded-2xl bg-[#073e6c] px-5 py-3 text-sm font-semibold tracking-wide text-white transition hover:bg-[#062f52]">
-  <span style={{ fontFamily: "Amplesoft, sans-serif" }}>
+  <span style={{ fontFamily: "Inter, sans-serif" }}>
     DOWNLOAD
   </span>
 </button>
