@@ -6,39 +6,54 @@ import { motion } from "motion/react";
 
 const Banner = () => {
   return (
-    <section className="w-full px-2 sm:px-6 lg:px-8">
-      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[20px] sm:rounded-[32px]">
-
+    <section className="w-full overflow-hidden px-2 sm:px-6 lg:px-8">
+      <div
+        className="
+          relative
+          mx-auto
+          w-full
+          max-w-7xl
+          overflow-hidden
+          rounded-[20px]
+          sm:rounded-[32px]
+        "
+      >
         {/* =========================
             Main Banner Image
         ========================== */}
-     <Image
-  src="/BG-12.svg"
-  alt="Trusted Home Service"
-  width={1920}
-  height={800}
-  priority
-  className="
-    block
-    -mt-2
-    h-auto
-    w-[95%]
-    sm:-mt-4
-    sm:w-[95%]
-    md:-mt-6
-    md:w-[95%]
-    lg:-mt-60
-    lg:w-[80%]
-    translate-x-[80px]
-    xl:-mt-20
-  "
-/>
+        <Image
+          src="/BG-12.svg"
+          alt="Trusted Home Service"
+          width={1920}
+          height={800}
+          priority
+          className="
+            block
+            h-auto
+            w-full
+            -mt-2
+            translate-x-0
+
+            sm:-mt-4
+            sm:w-[95%]
+            sm:translate-x-0
+
+            md:-mt-6
+            md:w-[95%]
+            md:translate-x-0
+
+            lg:-mt-60
+            lg:w-[80%]
+            lg:translate-x-[80px]
+
+            xl:-mt-20
+          "
+        />
 
         {/* =========================
             Banner Content
         ========================== */}
         <div className="absolute inset-0">
-
           {/* =========================
               Heading + Description
           ========================== */}
@@ -46,12 +61,15 @@ const Banner = () => {
             className="
               absolute
               left-1/2
-              top-[4%]
+              top-[5%]
               z-20
               w-full
               -translate-x-1/2
+              px-2
               text-center
+
               sm:top-[5%]
+              sm:px-0
             "
           >
             <h1
@@ -61,6 +79,9 @@ const Banner = () => {
                 font-semibold
                 leading-[1.05]
                 text-black
+
+                min-[400px]:text-[22px]
+
                 sm:text-4xl
                 md:text-5xl
                 lg:text-6xl
@@ -76,6 +97,7 @@ const Banner = () => {
                   items-center
                   justify-center
                   gap-1
+
                   sm:gap-2
                   md:gap-3
                 "
@@ -88,6 +110,9 @@ const Banner = () => {
                   className="
                     h-auto
                     w-[55px]
+
+                    min-[400px]:w-[65px]
+
                     sm:w-[70px]
                     md:w-[85px]
                     lg:w-[100px]
@@ -100,19 +125,24 @@ const Banner = () => {
 
             {/* Description */}
             <p
+              style={{ fontFamily: "Inter, sans-serif" }}
               className="
                 mt-1
                 px-2
                 text-[8px]
-                leading-[1.2]
+                leading-[1.3]
                 text-gray-600
+
+                min-[400px]:text-[9px]
+
                 sm:mt-2
                 sm:text-sm
+
                 md:mt-3
                 md:text-base
+
                 lg:text-base
               "
-              style={{ fontFamily: "Inter, sans-serif" }}
             >
               Find trusted professionals for your home,
               <br />
@@ -123,23 +153,28 @@ const Banner = () => {
           {/* =========================
               Main Center Item
           ========================== */}
-     <Image
+        <Image
   src="/Website-09.png"
   alt="Home service"
   width={200}
   height={200}
   className="
     absolute
-    object-cover
     left-1/2
-    top-[38%]
+    top-[37%]
     z-10
-    w-[15vw]
-    min-w-[55px]
+    w-[14%]
+    min-w-[40px]
     max-w-[150px]
     -translate-x-1/2
+    object-cover
+
+    sm:top-[38%]
     sm:w-[16vw]
+    sm:min-w-[55px]
+
     md:w-[17vw]
+
     lg:w-[22vw]
     lg:max-w-[150px]
   "
@@ -156,14 +191,19 @@ const Banner = () => {
             className="
               absolute
               left-1/2
-              top-[47%]
+              top-[46%]
               z-10
               h-auto
-              w-[62%]
+              w-[72%]
               -translate-x-1/2
+
+              min-[400px]:w-[68%]
+
               sm:top-[47.5%]
               sm:w-[63%]
+
               md:w-[64%]
+
               lg:w-[65%]
             "
           />
@@ -175,8 +215,8 @@ const Banner = () => {
             className="
               group
               absolute
-              left-[22%]
-              top-[31%]
+              left-[20%]
+              top-[30%]
               z-20
               flex
               items-center
@@ -193,6 +233,9 @@ const Banner = () => {
               duration-300
               hover:scale-105
               cursor-pointer
+
+              min-[400px]:left-[21%]
+              min-[400px]:text-[8px]
 
               sm:left-[23%]
               sm:text-sm
@@ -253,11 +296,11 @@ const Banner = () => {
             }}
             className="
               absolute
-              left-[9%]
+              left-[7%]
               top-[40%]
               z-20
-             
-              w-[6%]
+              w-[8%]
+
               sm:left-[10%]
               sm:w-[7%]
             "
@@ -284,10 +327,13 @@ const Banner = () => {
             className="
               absolute
               left-1/2
-              top-[47.5%]
+              top-[47%]
               z-10
-              w-[65%]
+              w-[72%]
               -translate-x-1/2
+
+              sm:top-[47.5%]
+              sm:w-[65%]
             "
           >
             <Image
@@ -297,11 +343,14 @@ const Banner = () => {
               height={100}
               className="
                 absolute
-                right-[9%]
+                right-[8%]
                 top-0
                 z-20
                 h-auto
-                w-[7%]
+                w-[8%]
+
+                sm:right-[9%]
+                sm:w-[7%]
               "
             />
           </motion.div>
@@ -318,10 +367,11 @@ const Banner = () => {
             }}
             className="
               absolute
-              left-[24%]
+              left-[21%]
               top-[55%]
               z-20
-              w-[7.5%]
+              w-[9%]
+
               sm:left-[23%]
               sm:w-[8.5%]
             "
@@ -347,10 +397,11 @@ const Banner = () => {
             }}
             className="
               absolute
-              left-[32%]
+              left-[29%]
               top-[40%]
               z-20
-              w-[7.5%]
+              w-[9%]
+
               sm:left-[33%]
               sm:w-[8.5%]
             "
@@ -376,10 +427,11 @@ const Banner = () => {
             }}
             className="
               absolute
-              right-[32%]
+              right-[29%]
               top-[40%]
               z-20
-              w-[7.5%]
+              w-[9%]
+
               sm:right-[33%]
               sm:w-[8.5%]
             "
@@ -405,10 +457,11 @@ const Banner = () => {
             }}
             className="
               absolute
-              right-[24%]
+              right-[21%]
               top-[55%]
               z-20
-              w-[7.5%]
+              w-[9%]
+
               sm:right-[25%]
               sm:w-[8.5%]
             "
@@ -421,7 +474,6 @@ const Banner = () => {
               className="h-auto w-full"
             />
           </motion.div>
-
         </div>
       </div>
     </section>
