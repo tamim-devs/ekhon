@@ -76,7 +76,7 @@ const [activeItem, setActiveItem] = useState(null);
         </div>
 
         {/* Download Button */}
-        <button className="hidden rounded-full bg-[#073e6c] px-4 py-1.5 text-md font-medium tracking-wide text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#062f52] hover:shadow-md md:block">
+        <button className="hidden rounded-full bg-[#073e6c] px-4 py-1.5 text-md font-medium tracking-wide text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#062f52] hover:shadow-md cursor-pointer md:block">
   <span style={{ fontFamily: "Inter, sans-serif" }}>
     DOWNLOAD
   </span>
@@ -131,7 +131,7 @@ const [activeItem, setActiveItem] = useState(null);
 </a>
             );
           })}
-        <button className="mt-2 w-full rounded-2xl bg-[#073e6c] px-5 py-3 text-sm font-semibold tracking-wide text-white transition hover:bg-[#062f52]">
+        <button className="mt-2 w-full rounded-2xl bg-[#073e6c] px-5 py-3 text-sm font-semibold tracking-wide text-white transition hover:bg-[#062f52] cursor-pointer">
   <span style={{ fontFamily: "Inter, sans-serif" }}>
     DOWNLOAD
   </span>
