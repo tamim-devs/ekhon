@@ -23,7 +23,7 @@ const navItems = [
 ];
 
 const Navbar = () => {
-  const [activeItem, setActiveItem] = useState("About");
+const [activeItem, setActiveItem] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleNavClick = (name) => {
@@ -49,33 +49,38 @@ const Navbar = () => {
             const isActive = activeItem === item.name;
 
             return (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={() => handleNavClick(item.name)}
-                className={`rounded-full px-5 py-2.5 text-md font-medium transition-all duration-300 ${
-                  isActive
-                    ? "bg-[#d7f2fa] text-[#123f68] shadow-sm"
-                    : "text-gray-600 hover:bg-white hover:text-[#123f68]"
-                }`}
-              >
-                <span
-                  className={`mr-1.5 transition ${
-                    isActive ? "opacity-100" : "opacity-50"
-                  }`}
-                >
-                  •
-                </span>
-                {item.name}
-              </a>
+            <a
+  key={item.name}
+  href={item.href}
+  onClick={() => handleNavClick(item.name)}
+  className={`rounded-full px-5 py-2.5 text-md font-medium transition-all duration-300 ${
+    isActive
+      ? "bg-[#d7f2fa] text-[#123f68] shadow-sm"
+      : "text-gray-600 hover:bg-white hover:text-[#123f68]"
+  }`}
+>
+  <span
+    className={`mr-1.5 font-extrabold text-md transition ${
+      isActive ? "opacity-100" : "opacity-50"
+    }`}
+  >
+    •
+  </span>
+
+  <span style={{ fontFamily: "Amplesoft, sans-serif" }}>
+    {item.name}
+  </span>
+</a>
             );
           })}
         </div>
 
         {/* Download Button */}
         <button className="hidden rounded-full bg-[#073e6c] px-6 py-3 text-md font-semibold tracking-wide text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#062f52] hover:shadow-md md:block">
-          DOWNLOAD
-        </button>
+  <span style={{ fontFamily: "Amplesoft, sans-serif" }}>
+    DOWNLOAD
+  </span>
+</button>
 
         {/* Mobile Menu Button */}
         <button
@@ -108,25 +113,29 @@ const Navbar = () => {
             const isActive = activeItem === item.name;
 
             return (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={() => handleNavClick(item.name)}
-                className={`mb-1 flex font-focus items-center rounded-2xl px-5 py-3 text-sm font-medium transition ${
-                  isActive
-                    ? "bg-[#d7f2fa] text-[#123f68]"
-                    : "text-gray-600 hover:bg-white hover:text-[#123f68]"
-                }`}
-              >
-                <span className="mr-2">•</span>
-                {item.name}
-              </a>
+            <a
+  key={item.name}
+  href={item.href}
+  onClick={() => handleNavClick(item.name)}
+  className={`mb-1 flex items-center rounded-2xl px-5 py-3 text-sm font-medium transition ${
+    isActive
+      ? "bg-[#d7f2fa] text-[#123f68]"
+      : "text-gray-600 hover:bg-white hover:text-[#123f68]"
+  }`}
+>
+  <span className="mr-2 font-extrabold">•</span>
+
+  <span style={{ fontFamily: "Amplesoft, sans-serif" }}>
+    {item.name}
+  </span>
+</a>
             );
           })}
-
-          <button className="mt-2 w-full rounded-2xl bg-[#073e6c] px-5 py-3 text-sm font-semibold tracking-wide text-white transition hover:bg-[#062f52]">
-            DOWNLOAD
-          </button>
+        <button className="mt-2 w-full rounded-2xl bg-[#073e6c] px-5 py-3 text-sm font-semibold tracking-wide text-white transition hover:bg-[#062f52]">
+  <span style={{ fontFamily: "Amplesoft, sans-serif" }}>
+    DOWNLOAD
+  </span>
+</button>
         </div>
       </div>
     </header>
