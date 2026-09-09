@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const services = [
   {
@@ -60,34 +60,75 @@ const Slider = () => {
     return (index + total) % total;
   };
 
-  const handlePrev = () => {
-    setDirection(-1);
-    setCurrentIndex((prev) => getIndex(prev - 1));
-  };
-
   const handleNext = () => {
     setDirection(1);
     setCurrentIndex((prev) => getIndex(prev + 1));
   };
 
+  const handlePrev = () => {
+    setDirection(-1);
+    setCurrentIndex((prev) => getIndex(prev - 1));
+  };
+
   const handlePagination = (index) => {
     if (index === currentIndex) return;
 
-    setDirection(index > currentIndex ? 1 : -1);
+    const forward = getIndex(index - currentIndex);
+    const backward = getIndex(currentIndex - index);
+
+    setDirection(forward <= backward ? 1 : -1);
     setCurrentIndex(index);
   };
 
-  const getService = (offset) => {
-    return services[getIndex(currentIndex + offset)];
+  /*
+  ============================================
+  GET POSITION
+  ============================================
+  */
+
+  const getRelativePosition = (index) => {
+    let diff = index - currentIndex;
+
+    if (diff > total / 2) {
+      diff -= total;
+    }
+
+    if (diff < -total / 2) {
+      diff += total;
+    }
+
+    return diff;
   };
 
   return (
     <section className="relative w-full overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24">
-      {/* Background Glow */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[280px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#dff6ff] opacity-60 blur-[80px] sm:h-[400px] sm:w-[550px] lg:h-[500px] lg:w-[700px] lg:blur-[100px]" />
+      {/* BACKGROUND GLOW */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-1/2
+          -z-10
+          h-[280px]
+          w-[400px]
+          -translate-x-1/2
+          -translate-y-1/2
+          rounded-full
+          bg-[#dff6ff]
+          opacity-60
+          blur-[80px]
+          sm:h-[400px]
+          sm:w-[550px]
+          lg:h-[500px]
+          lg:w-[700px]
+          lg:blur-[100px]
+        "
+      />
 
       <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
         {/* ================= HEADING ================= */}
+
         <div className="mx-auto mb-8 max-w-2xl text-center sm:mb-10 lg:mb-12">
           <h2 className="text-3xl font-medium tracking-tight text-[#171717] sm:text-4xl md:text-5xl">
             everything your home needs
@@ -100,92 +141,76 @@ const Slider = () => {
         </div>
 
         {/* ================= SLIDER ================= */}
+
         <div
           className="
             relative
             mx-auto
-            flex
-            h-[370px]
-            max-w-[1100px]
-            items-center
-            justify-center
-            sm:h-[400px]
-            md:h-[420px]
-            lg:h-[430px]
+            h-[390px]
+            max-w-[900px]
+            sm:h-[420px]
+            md:h-[440px]
+            lg:h-[460px]
           "
         >
-          <AnimatePresence initial={false} mode="popLayout">
-            {/* LEFT SIDE CARD - LARGE SCREEN */}
-            <AnimatedSideCard
-              key={`left-side-${getService(-2).title}`}
-              service={getService(-2)}
-              position="left-side"
-              direction={direction}
-            />
+          {/* ================= DRAG AREA ================= */}
 
-            {/* LEFT CARD - TABLET + */}
-            <AnimatedSideCard
-              key={`left-${getService(-1).title}`}
-              service={getService(-1)}
-              position="left"
-              direction={direction}
-            />
+          <motion.div
+            className="absolute inset-0 touch-pan-y"
+            drag="x"
+            dragConstraints={{
+              left: 0,
+              right: 0,
+            }}
+            dragElastic={0.15}
+            onDragEnd={(event, info) => {
+              const offset = info.offset.x;
+              const velocity = info.velocity.x;
 
-            {/* ================= CENTER CARD ================= */}
-            <motion.div
-              key={`center-${services[currentIndex].title}`}
-              initial={{
-                opacity: 0,
-                x: direction === 1 ? 80 : -80,
-                scale: 0.92,
-              }}
-              animate={{
-                opacity: 1,
-                x: 0,
-                scale: 1,
-              }}
-              exit={{
-                opacity: 0,
-                x: direction === 1 ? -80 : 80,
-                scale: 0.92,
-              }}
-              transition={{
-                duration: 0.5,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="
-                relative
-                z-20
-                w-[270px]
-                sm:w-[310px]
-                md:w-[330px]
-                lg:w-[360px]
-              "
-            >
-              <ServiceCard service={services[currentIndex]} />
-            </motion.div>
+              /*
+              LEFT DRAG
+              */
+              if (offset < -60 || velocity < -500) {
+                handleNext();
+                return;
+              }
 
-            {/* RIGHT CARD - TABLET + */}
-            <AnimatedSideCard
-              key={`right-${getService(1).title}`}
-              service={getService(1)}
-              position="right"
-              direction={direction}
-            />
+              /*
+              RIGHT DRAG
+              */
+              if (offset > 60 || velocity > 500) {
+                handlePrev();
+              }
+            }}
+          >
+            {services.map((service, index) => {
+              const position = getRelativePosition(index);
 
-            {/* RIGHT SIDE CARD - LARGE SCREEN */}
-            <AnimatedSideCard
-              key={`right-side-${getService(2).title}`}
-              service={getService(2)}
-              position="right-side"
-              direction={direction}
-            />
-          </AnimatePresence>
+              /*
+              Only 5 cards participate
+              */
+
+              if (Math.abs(position) > 2) {
+                return null;
+              }
+
+              return (
+                <StackCard
+                  key={service.title}
+                  service={service}
+                  position={position}
+                  direction={direction}
+                />
+              );
+            })}
+          </motion.div>
         </div>
 
         {/* ================= CONTROLS ================= */}
-        <div className="mt-2 flex flex-col items-center gap-4 sm:mt-4 sm:gap-5">
-          {/* Navigation */}
+
+        <div className="mt-3 flex flex-col items-center gap-4 sm:mt-5 sm:gap-5">
+          {/* NAVIGATION */}
+
           <div
             className="
               flex
@@ -199,7 +224,8 @@ const Slider = () => {
               sm:p-2
             "
           >
-            {/* Previous */}
+            {/* PREVIOUS */}
+
             <button
               onClick={handlePrev}
               aria-label="Previous service"
@@ -223,68 +249,65 @@ const Slider = () => {
               <ChevronLeft size={18} strokeWidth={1.8} />
             </button>
 
-            {/* Current Service */}
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={services[currentIndex].title}
-                initial={{
-                  opacity: 0,
-                  x: direction === 1 ? 12 : -12,
-                }}
-                animate={{
-                  opacity: 1,
-                  x: 0,
-                }}
-                exit={{
-                  opacity: 0,
-                  x: direction === 1 ? -12 : 12,
-                }}
-                transition={{
-                  duration: 0.25,
-                }}
+            {/* CURRENT */}
+
+            <div
+              className="
+                flex
+                min-w-[120px]
+                items-center
+                justify-center
+                gap-2
+                px-1
+                sm:min-w-[145px]
+                sm:gap-3
+                sm:px-2
+              "
+            >
+              <div
                 className="
+                  relative
                   flex
-                  min-w-[120px]
+                  h-8
+                  w-8
+                  shrink-0
                   items-center
                   justify-center
-                  gap-2
-                  px-1
-                  sm:min-w-[145px]
-                  sm:gap-3
-                  sm:px-2
+                  overflow-hidden
+                  rounded-full
+                  border
+                  border-gray-200
+                  bg-white
+                  sm:h-10
+                  sm:w-10
                 "
               >
-                <div
-                  className="
-                    relative
-                    flex
-                    h-8
-                    w-8
-                    shrink-0
-                    overflow-hidden
-                    rounded-full
-                    border
-                    border-gray-200
-                    bg-white
-                    sm:h-10
-                    sm:w-10
-                  "
-                >
-                  <Image
-                    src={services[currentIndex].image}
-                    alt={services[currentIndex].title}
-                    fill
-                    className="object-contain p-1 sm:p-1.5"
-                  />
-                </div>
+                <Image
+                  src={services[currentIndex].image}
+                  alt={services[currentIndex].title}
+                  fill
+                  className="object-contain p-1 sm:p-1.5"
+                />
+              </div>
 
-                <span className="max-w-[105px] truncate whitespace-nowrap text-xs font-medium text-[#073f68] sm:max-w-none sm:text-sm">
-                  {services[currentIndex].title}
-                </span>
-              </motion.div>
-            </AnimatePresence>
+              <span
+                className="
+                  max-w-[105px]
+                  truncate
+                  whitespace-nowrap
+                  text-xs
+                  font-medium
+                  text-[#073f68]
+                  sm:max-w-none
+                  sm:text-sm
+                "
+              >
+                {services[currentIndex].title}
+              </span>
+            </div>
 
-            {/* Next */}
+            {/* NEXT */}
+
             <button
               onClick={handleNext}
               aria-label="Next service"
@@ -309,8 +332,9 @@ const Slider = () => {
             </button>
           </div>
 
-          {/* ================= PAGINATION ================= */}
-          <div className="flex max-w-full items-center justify-center gap-1 sm:gap-1.5">
+          {/* PAGINATION */}
+
+          <div className="flex items-center justify-center gap-1 sm:gap-1.5">
             {services.map((service, index) => (
               <button
                 key={service.title}
@@ -325,7 +349,6 @@ const Slider = () => {
                   }}
                   transition={{
                     duration: 0.3,
-                    ease: [0.22, 1, 0.36, 1],
                   }}
                   className="h-1.5 rounded-full bg-[#0a4b75]"
                 />
@@ -338,94 +361,141 @@ const Slider = () => {
   );
 };
 
-
 /* =========================================================
-   ANIMATED SIDE CARD
+   STACK CARD
 ========================================================= */
 
-const AnimatedSideCard = ({ service, position, direction }) => {
-  const positionClasses = {
-    "left-side": `
-      absolute
-      left-[-8%]
-      hidden
-      w-[210px]
-      lg:block
-      xl:left-0
-      xl:w-[250px]
-    `,
+const StackCard = ({
+  service,
+  position,
+}) => {
+  const isCenter = position === 0;
+  const isLeft = position < 0;
+  const isRight = position > 0;
 
-    left: `
-      absolute
-      left-[-6%]
-      hidden
-      w-[230px]
-      md:block
-      lg:left-[4%]
-      lg:w-[250px]
-      xl:left-[14%]
-      xl:w-[280px]
-    `,
+  /*
+  ============================================
+  CARD HORIZONTAL POSITION
 
-    right: `
-      absolute
-      right-[-6%]
-      hidden
-      w-[230px]
-      md:block
-      lg:right-[4%]
-      lg:w-[250px]
-      xl:right-[14%]
-      xl:w-[280px]
-    `,
+  Cards are deliberately close together.
+  ============================================
+  */
 
-    "right-side": `
-      absolute
-      right-[-8%]
-      hidden
-      w-[210px]
-      lg:block
-      xl:right-0
-      xl:w-[250px]
-    `,
-  };
+  let x = "-50%";
 
-  const isNear = position === "left" || position === "right";
+  if (position === -1) {
+    x = "calc(-50% - 205px)";
+  }
+
+  if (position === -2) {
+    x = "calc(-50% - 385px)";
+  }
+
+  if (position === 1) {
+    x = "calc(-50% + 205px)";
+  }
+
+  if (position === 2) {
+    x = "calc(-50% + 385px)";
+  }
+
+  /*
+  ============================================
+  SCALE
+  ============================================
+  */
+
+  let scale = 0.82;
+
+  if (position === -1 || position === 1) {
+    scale = 0.91;
+  }
+
+  if (isCenter) {
+    scale = 1;
+  }
+
+  /*
+  ============================================
+  ROTATION
+  ============================================
+  */
+
+  let rotateY = 0;
+
+  if (isLeft) {
+    rotateY = 12;
+  }
+
+  if (isRight) {
+    rotateY = -12;
+  }
+
+  /*
+  ============================================
+  Z INDEX
+  ============================================
+  */
+
+  let zIndex = 10;
+
+  if (position === -2 || position === 2) {
+    zIndex = 5;
+  }
+
+  if (isCenter) {
+    zIndex = 30;
+  }
 
   return (
     <motion.div
-      initial={{
-        opacity: 0,
-        x: direction === 1 ? 60 : -60,
-        scale: 0.85,
+      className={`
+        absolute
+        left-1/2
+        top-1/2
+        w-[220px]
+        sm:w-[250px]
+        md:w-[270px]
+        lg:w-[280px]
+      `}
+      style={{
+        zIndex,
+        perspective: "1200px",
+        transformStyle: "preserve-3d",
       }}
+      initial={false}
       animate={{
-        opacity: isNear ? 0.9 : 0.75,
-        x: 0,
-        scale: isNear ? 0.94 : 0.88,
+        x,
+        y: "-50%",
+        scale,
+        rotateY,
+        opacity: 1,
       }}
-      exit={{
-        opacity: 0,
-        x: direction === 1 ? -60 : 60,
-        scale: 0.85,
-      }}
-      transition={{
-        duration: 0.5,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className={positionClasses[position]}
+    transition={{
+  duration: 1.3,
+  ease: [0.22, 1, 0.36, 1],
+}}
     >
-      <ServiceCard service={service} small />
+      <ServiceCard
+        service={service}
+        small={!isCenter}
+        align={isRight ? "right" : "left"}
+      />
     </motion.div>
   );
 };
-
 
 /* =========================================================
    SERVICE CARD
 ========================================================= */
 
-const ServiceCard = ({ service, small = false }) => {
+const ServiceCard = ({
+  service,
+  small = false,
+  align = "left",
+}) => {
+  const isRight = align === "right";
+
   return (
     <div
       className={`
@@ -437,7 +507,8 @@ const ServiceCard = ({ service, small = false }) => {
         ${small ? "p-3 sm:p-4" : "p-4 sm:p-5"}
       `}
     >
-      {/* Image */}
+      {/* IMAGE */}
+
       <div
         className={`
           relative
@@ -456,7 +527,8 @@ const ServiceCard = ({ service, small = false }) => {
           src={service.image}
           alt={service.title}
           fill
-          className="object-contain p-3 sm:p-4"
+          draggable={false}
+          className="pointer-events-none object-contain p-3 sm:p-4"
           sizes={
             small
               ? "(max-width: 1024px) 230px, 280px"
@@ -465,8 +537,17 @@ const ServiceCard = ({ service, small = false }) => {
         />
       </div>
 
-      {/* Content */}
-      <div className="px-1 pb-1 pt-3 sm:pt-4">
+      {/* CONTENT */}
+
+      <div
+        className={`
+          px-1
+          pb-1
+          pt-3
+          sm:pt-4
+          ${isRight ? "text-right" : "text-left"}
+        `}
+      >
         <h3
           className={`
             font-semibold
