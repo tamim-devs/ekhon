@@ -10,43 +10,49 @@ const services = [
     title: "AC Service",
     description:
       "Installation, repair, and cleaning to keep your AC running smoothly.",
-    image: "/services/ac.png",
+    image: "/Elements-15.svg",
   },
   {
     title: "Painter",
     description:
       "Refresh your home with professional and reliable painting services.",
-    image: "/services/painter.png",
+    image: "/Elements-17.svg",
   },
   {
     title: "Carpenter",
     description:
       "Get help with furniture, doors, cabinets, and other woodwork.",
-    image: "/services/carpenter.png",
+    image: "/Elements-15.svg",
   },
   {
     title: "Plumber",
     description:
       "Reliable plumbing solutions for repairs, installation, and maintenance.",
-    image: "/services/plumber.png",
+    image: "/Elements-16.svg",
   },
   {
     title: "Electrician",
     description:
       "Professional electrical services for safe and reliable home solutions.",
-    image: "/services/electrician.png",
+    image: "/Elements-19.svg",
   },
   {
     title: "Cleaning",
     description:
       "Keep your home fresh and clean with trusted cleaning professionals.",
-    image: "/services/cleaning.png",
+    image: "/Elements-18.svg",
   },
   {
     title: "CCTV & Security",
     description:
       "Professional security and CCTV installation for your home.",
-    image: "/services/cctv.png",
+    image: "/Elements-19.svg",
+  },
+  {
+    title: "Pc & Security",
+    description:
+      "Professional security and CCTV installation for your home.",
+    image: "/Elements-19.svg",
   },
 ];
 
@@ -80,11 +86,9 @@ const Slider = () => {
     setCurrentIndex(index);
   };
 
-  /*
-  ============================================
-  GET POSITION
-  ============================================
-  */
+  /* ============================================
+     GET RELATIVE POSITION
+  ============================================ */
 
   const getRelativePosition = (index) => {
     let diff = index - currentIndex;
@@ -101,33 +105,40 @@ const Slider = () => {
   };
 
   return (
-    <section className="relative w-full overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24">
-      {/* BACKGROUND GLOW */}
+    <section
+     id="services"
+    className="relative w-full overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24">
+      {/* ============================================
+          BACKGROUND GLOW
+      ============================================ */}
+
       <div
         className="
           pointer-events-none
           absolute
           left-1/2
-          top-1/2
+          top-[58%]
           -z-10
-          h-[280px]
-          w-[400px]
+          h-[320px]
+          w-[500px]
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
           bg-[#dff6ff]
-          opacity-60
-          blur-[80px]
-          sm:h-[400px]
-          sm:w-[550px]
+          opacity-70
+          blur-[90px]
+          sm:h-[420px]
+          sm:w-[700px]
           lg:h-[500px]
-          lg:w-[700px]
-          lg:blur-[100px]
+          lg:w-[900px]
+          lg:blur-[110px]
         "
       />
 
-      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
-        {/* ================= HEADING ================= */}
+      <div className="mx-auto max-w-[1400px] px-3 sm:px-6 lg:px-8">
+        {/* ============================================
+            HEADING
+        ============================================ */}
 
         <div className="mx-auto mb-8 max-w-2xl text-center sm:mb-10 lg:mb-12">
           <h2 className="text-3xl font-medium tracking-tight text-[#171717] sm:text-4xl md:text-5xl">
@@ -140,20 +151,25 @@ const Slider = () => {
           </p>
         </div>
 
-        {/* ================= SLIDER ================= */}
+        {/* ============================================
+            SLIDER
+        ============================================ */}
 
         <div
           className="
             relative
             mx-auto
-            h-[390px]
-            max-w-[900px]
-            sm:h-[420px]
-            md:h-[440px]
-            lg:h-[460px]
+            h-[400px]
+            w-full
+            max-w-[1280px]
+            sm:h-[430px]
+            md:h-[450px]
+            lg:h-[475px]
           "
         >
-          {/* ================= DRAG AREA ================= */}
+          {/* ============================================
+              DRAG AREA
+          ============================================ */}
 
           <motion.div
             className="absolute inset-0 touch-pan-y"
@@ -167,17 +183,15 @@ const Slider = () => {
               const offset = info.offset.x;
               const velocity = info.velocity.x;
 
-              /*
-              LEFT DRAG
-              */
+              /* LEFT */
+
               if (offset < -60 || velocity < -500) {
                 handleNext();
                 return;
               }
 
-              /*
-              RIGHT DRAG
-              */
+              /* RIGHT */
+
               if (offset > 60 || velocity > 500) {
                 handlePrev();
               }
@@ -187,10 +201,18 @@ const Slider = () => {
               const position = getRelativePosition(index);
 
               /*
-              Only 5 cards participate
+              7 CARDS VISIBLE
+
+              -3
+              -2
+              -1
+               0
+              +1
+              +2
+              +3
               */
 
-              if (Math.abs(position) > 2) {
+              if (Math.abs(position) > 3) {
                 return null;
               }
 
@@ -206,10 +228,14 @@ const Slider = () => {
           </motion.div>
         </div>
 
-        {/* ================= CONTROLS ================= */}
+        {/* ============================================
+            CONTROLS
+        ============================================ */}
 
-        <div className="mt-3 flex flex-col items-center gap-4 sm:mt-5 sm:gap-5">
-          {/* NAVIGATION */}
+        <div className="mt-2 flex flex-col items-center gap-4 sm:mt-4 sm:gap-5">
+          {/* ============================================
+              NAVIGATION
+          ============================================ */}
 
           <div
             className="
@@ -332,7 +358,9 @@ const Slider = () => {
             </button>
           </div>
 
-          {/* PAGINATION */}
+          {/* ============================================
+              PAGINATION
+          ============================================ */}
 
           <div className="flex items-center justify-center gap-1 sm:gap-1.5">
             {services.map((service, index) => (
@@ -365,82 +393,101 @@ const Slider = () => {
    STACK CARD
 ========================================================= */
 
-const StackCard = ({
-  service,
-  position,
-}) => {
+const StackCard = ({ service, position }) => {
   const isCenter = position === 0;
   const isLeft = position < 0;
   const isRight = position > 0;
 
-  /*
-  ============================================
-  CARD HORIZONTAL POSITION
+  /* ============================================
+     HORIZONTAL POSITION
 
-  Cards are deliberately close together.
-  ============================================
-  */
+     Cards are intentionally close together.
+     This creates the same compressed look
+     as your screenshot.
+  ============================================ */
 
   let x = "-50%";
 
+  /* LEFT */
+
   if (position === -1) {
-    x = "calc(-50% - 205px)";
+    x = "calc(-50% - 175px)";
   }
 
   if (position === -2) {
-    x = "calc(-50% - 385px)";
+    x = "calc(-50% - 320px)";
   }
 
+  if (position === -3) {
+    x = "calc(-50% - 445px)";
+  }
+
+  /* RIGHT */
+
   if (position === 1) {
-    x = "calc(-50% + 205px)";
+    x = "calc(-50% + 175px)";
   }
 
   if (position === 2) {
-    x = "calc(-50% + 385px)";
+    x = "calc(-50% + 320px)";
   }
 
-  /*
-  ============================================
-  SCALE
-  ============================================
-  */
+  if (position === 3) {
+    x = "calc(-50% + 445px)";
+  }
 
-  let scale = 0.82;
+  /* ============================================
+     SCALE
+
+     Center = BIG
+     Near cards = medium
+     Outer cards = smaller
+  ============================================ */
+
+  let scale = 0.72;
+
+  if (position === -3 || position === 3) {
+    scale = 0.72;
+  }
+
+  if (position === -2 || position === 2) {
+    scale = 0.80;
+  }
 
   if (position === -1 || position === 1) {
-    scale = 0.91;
+    scale = 0.90;
   }
 
   if (isCenter) {
     scale = 1;
   }
 
-  /*
-  ============================================
-  ROTATION
-  ============================================
-  */
+  /* ============================================
+     ROTATION
+  ============================================ */
 
   let rotateY = 0;
 
   if (isLeft) {
-    rotateY = 12;
+    rotateY = 10;
   }
 
   if (isRight) {
-    rotateY = -12;
+    rotateY = -10;
   }
 
-  /*
-  ============================================
-  Z INDEX
-  ============================================
-  */
+  /* ============================================
+     Z INDEX
+  ============================================ */
 
-  let zIndex = 10;
+  let zIndex = 3;
 
   if (position === -2 || position === 2) {
     zIndex = 5;
+  }
+
+  if (position === -1 || position === 1) {
+    zIndex = 10;
   }
 
   if (isCenter) {
@@ -449,15 +496,15 @@ const StackCard = ({
 
   return (
     <motion.div
-      className={`
+      className="
         absolute
         left-1/2
         top-1/2
-        w-[220px]
-        sm:w-[250px]
-        md:w-[270px]
-        lg:w-[280px]
-      `}
+        w-[270px]
+        sm:w-[290px]
+        md:w-[305px]
+        lg:w-[315px]
+      "
       style={{
         zIndex,
         perspective: "1200px",
@@ -471,10 +518,10 @@ const StackCard = ({
         rotateY,
         opacity: 1,
       }}
-    transition={{
-  duration: 1.3,
-  ease: [0.22, 1, 0.36, 1],
-}}
+      transition={{
+        duration: 1.15,
+   
+      }}
     >
       <ServiceCard
         service={service}
@@ -500,26 +547,29 @@ const ServiceCard = ({
     <div
       className={`
         overflow-hidden
-        rounded-[18px]
+        rounded-[20px]
         bg-white
-        shadow-[0_8px_30px_rgba(0,0,0,0.07)]
+        shadow-[0_8px_30px_rgba(0,0,0,0.20)]
         sm:rounded-[24px]
         ${small ? "p-3 sm:p-4" : "p-4 sm:p-5"}
       `}
     >
-      {/* IMAGE */}
+      {/* ============================================
+          IMAGE
+      ============================================ */}
 
       <div
         className={`
           relative
           overflow-hidden
-          rounded-[14px]
-          bg-[#f8fafb]
+          rounded-[15px]
+         
           sm:rounded-[18px]
+
           ${
             small
-              ? "h-[115px] sm:h-[135px] lg:h-[145px]"
-              : "h-[165px] sm:h-[185px] md:h-[200px] lg:h-[210px]"
+              ? "h-[135px] sm:h-[150px] lg:h-[160px]"
+              : "h-[190px] sm:h-[215px] md:h-[230px] lg:h-[240px]"
           }
         `}
       >
@@ -528,16 +578,23 @@ const ServiceCard = ({
           alt={service.title}
           fill
           draggable={false}
-          className="pointer-events-none object-contain p-3 sm:p-4"
-          sizes={
-            small
-              ? "(max-width: 1024px) 230px, 280px"
-              : "(max-width: 640px) 270px, (max-width: 1024px) 330px, 360px"
-          }
+          className="
+            pointer-events-none
+            object-contain
+            p-3
+            sm:p-4
+          "
+          sizes="
+            (max-width: 640px) 270px,
+            (max-width: 1024px) 310px,
+            330px
+          "
         />
       </div>
 
-      {/* CONTENT */}
+      {/* ============================================
+          CONTENT
+      ============================================ */}
 
       <div
         className={`
@@ -548,20 +605,30 @@ const ServiceCard = ({
           ${isRight ? "text-right" : "text-left"}
         `}
       >
+        {/* TITLE */}
+
         <h3
           className={`
             font-semibold
             text-[#222]
-            ${small ? "text-sm sm:text-base" : "text-lg sm:text-xl"}
+
+            ${
+              small
+                ? "text-sm sm:text-base"
+                : "text-lg sm:text-xl"
+            }
           `}
         >
           {service.title}
         </h3>
 
+        {/* DESCRIPTION */}
+
         <p
           className={`
             mt-1.5
             text-gray-500
+
             ${
               small
                 ? "line-clamp-2 text-[11px] leading-4 sm:text-xs sm:leading-5"

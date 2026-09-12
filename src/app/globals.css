@@ -14,3 +14,8 @@
   --font-amplesoft: "Amplesoft", sans-serif;
   --font-inter: "Inter", sans-serif;
 }
+
+
+html {
+  scroll-behavior: smooth;
+}

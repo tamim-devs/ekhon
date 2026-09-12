@@ -1,12 +1,18 @@
 "use client";
 
 import { Apple, Mail, Play } from "lucide-react";
+import Image from "next/image";
 import React from "react";
-import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa"
+import {
+  FaFacebook,
+  FaInstagram,
+  FaLinkedin,
+  FaYoutube,
+} from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="w-full px-3 pb-0 sm:px-6 lg:px-8">
+    <footer className="w-full px-3 pb-3 sm:px-6 lg:px-8">
       <div
         className="
           relative
@@ -14,11 +20,11 @@ const Footer = () => {
           w-full
           max-w-7xl
           overflow-hidden
-          rounded-t-[42px]
+          rounded-[42px]
           bg-[#f5f6fa]
           px-7
           pt-10
-          sm:rounded-t-[50px]
+          sm:rounded-[50px]
           sm:px-10
           sm:pt-12
           md:px-14
@@ -29,6 +35,7 @@ const Footer = () => {
         {/* =====================================================
             MAIN FOOTER CONTENT
         ====================================================== */}
+
         <div
           className="
             relative
@@ -46,8 +53,9 @@ const Footer = () => {
           "
         >
           {/* =================================================
-              BRAND / DESCRIPTION
+              BRAND
           ================================================== */}
+
           <div>
             <p
               style={{ fontFamily: "Inter, sans-serif" }}
@@ -62,33 +70,35 @@ const Footer = () => {
                 lg:text-[12px]
               "
             >
-              ekhonn connects you with trusted
+              <span className="font-bold">ekhoon</span> connects you with
+              trusted
               <br />
               professionals for your everyday
               <br />
               home service needs.
             </p>
 
-            {/* Social Icons */}
+            {/* SOCIAL ICONS */}
+
             <div className="mt-6 flex items-center gap-2.5">
               <SocialIcon>
-                <FaFacebook  size={14} strokeWidth={2.5} />
+                <FaFacebook size={13} />
               </SocialIcon>
 
               <SocialIcon>
-                <FaInstagram size={14} strokeWidth={2.5} />
+                <FaInstagram size={13} />
               </SocialIcon>
 
               <SocialIcon>
-                <FaYoutube size={14} strokeWidth={2.5} />
+                <FaYoutube size={13} />
               </SocialIcon>
 
               <SocialIcon>
-                <FaLinkedin size={14} strokeWidth={2.5} />
+                <FaLinkedin size={13} />
               </SocialIcon>
 
               <SocialIcon>
-                <Mail size={14} strokeWidth={2.5} />
+                <Mail size={13} strokeWidth={2.5} />
               </SocialIcon>
             </div>
           </div>
@@ -96,6 +106,7 @@ const Footer = () => {
           {/* =================================================
               COMPANY
           ================================================== */}
+
           <div>
             <FooterTitle>Company</FooterTitle>
 
@@ -106,7 +117,8 @@ const Footer = () => {
               <FooterLink>Contact Us</FooterLink>
             </div>
 
-            {/* Support */}
+            {/* SUPPORT */}
+
             <div className="mt-7">
               <FooterTitle>Support</FooterTitle>
 
@@ -121,6 +133,7 @@ const Footer = () => {
           {/* =================================================
               FOR PROVIDERS
           ================================================== */}
+
           <div>
             <FooterTitle>For Providers</FooterTitle>
 
@@ -134,6 +147,7 @@ const Footer = () => {
           {/* =================================================
               GET THE EKHOON APP
           ================================================== */}
+
           <div>
             <FooterTitle>Get the Ekhonn App</FooterTitle>
 
@@ -150,9 +164,11 @@ const Footer = () => {
               Book trusted home services anytime, anywhere.
             </p>
 
-            {/* App Buttons */}
+            {/* APP BUTTONS */}
+
             <div className="mt-4 flex items-center gap-2">
-              {/* Google Play */}
+              {/* GOOGLE PLAY */}
+
               <button
                 className="
                   flex
@@ -189,7 +205,8 @@ const Footer = () => {
                 </div>
               </button>
 
-              {/* App Store */}
+              {/* APP STORE */}
+
               <button
                 className="
                   flex
@@ -230,63 +247,107 @@ const Footer = () => {
         </div>
 
         {/* =====================================================
-            BOTTOM FOOTER
+            DIVIDER + COPYRIGHT
         ====================================================== */}
+
         <div
           className="
             relative
             z-20
             mt-12
-            flex
-            flex-col
-            gap-5
             border-t
-            border-gray-200/70
+            border-gray-400/70
             pt-5
-            pb-32
-
             sm:mt-14
-            sm:flex-row
-            sm:items-center
-            sm:justify-between
-            sm:pb-36
-
             lg:mt-16
-            lg:pb-40
           "
         >
-          {/* Copyright */}
-          <p
-            style={{ fontFamily: "Inter, sans-serif" }}
+          <div
             className="
-              text-[10px]
-              text-gray-500
+              flex
+              flex-col
+              gap-4
+              pb-[170px]
 
-              sm:text-[11px]
-              lg:text-xs
+              sm:flex-row
+              sm:items-center
+              sm:justify-between
+              sm:pb-[190px]
+
+              md:pb-[210px]
+
+              lg:pb-[230px]
             "
           >
-            © 2026 Ekhonn. All rights reserved.
-          </p>
+            {/* COPYRIGHT */}
 
-          {/* Legal Links */}
-          <div className="flex items-center gap-6">
-            <FooterLink>Privacy Policy</FooterLink>
-            <FooterLink>Terms & Conditions</FooterLink>
+            <p
+              style={{ fontFamily: "Inter, sans-serif" }}
+              className="
+                text-[10px]
+                text-gray-500
+                sm:text-[11px]
+                lg:text-xs
+              "
+            >
+              © 2026 Ekhonn. All rights reserved.
+            </p>
+
+            {/* LEGAL LINKS */}
+
+            <div className="flex items-center gap-6">
+              <FooterLink>Privacy Policy</FooterLink>
+              <FooterLink>Terms & Conditions</FooterLink>
+            </div>
           </div>
         </div>
 
         {/* =====================================================
-            HUGE EKHONN TEXT
+            HUGE EKHOON LOGO
         ====================================================== */}
-      
+
+        <div
+          className="
+            pointer-events-none
+            absolute
+          
+            left-1/2
+            z-10
+            w-[920px]
+            -translate-x-1/2
+
+           
+            sm:w-[750px]
+
+            md:bottom-[-60px]
+            md:w-[900px]
+
+       
+            lg:w-[1050px]
+
+            xl:w-[1150px]
+          "
+        >
+          <Image
+            src="/Elements-22.svg"
+            alt=""
+            width={1200}
+            height={400}
+            priority
+            className="
+              h-auto
+              w-full
+              object-contain
+            "
+          />
+        </div>
       </div>
     </footer>
   );
 };
 
 /* =============================================================
-   SMALL COMPONENTS
+   FOOTER TITLE
 ============================================================= */
 
 const FooterTitle = ({ children }) => {
@@ -297,7 +358,6 @@ const FooterTitle = ({ children }) => {
         text-[12px]
         font-semibold
         text-[#111827]
-
         sm:text-[13px]
       "
     >
@@ -305,6 +365,10 @@ const FooterTitle = ({ children }) => {
     </h3>
   );
 };
+
+/* =============================================================
+   FOOTER LINK
+============================================================= */
 
 const FooterLink = ({ children }) => {
   return (
@@ -319,7 +383,6 @@ const FooterLink = ({ children }) => {
         text-gray-500
         transition-colors
         hover:text-[#073e6c]
-
         sm:text-[11px]
       "
     >
@@ -327,6 +390,10 @@ const FooterLink = ({ children }) => {
     </button>
   );
 };
+
+/* =============================================================
+   SOCIAL ICON
+============================================================= */
 
 const SocialIcon = ({ children }) => {
   return (

@@ -266,7 +266,7 @@ const Banner = () => {
                 bg-[#073e6c]
                 text-[10px]
                 text-white
-
+                rotate-[-400deg]
                 sm:ml-2
                 sm:h-8
                 sm:w-8
